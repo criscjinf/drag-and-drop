@@ -3,29 +3,30 @@ import './App.css';
 import uploadImg from './assets/cloud-upload-regular-240.png';
 import { enviarImagem } from './components/enviarImagem';
 
+const acceptFiles = {
+  'file/*': ['.png', '.jpg', '.jpeg', '.pdf', '.docx'],
+};
+
 function App() {
   return (
     <main className="App">
-      <div>TESTE</div>
-      {/* <DndProvider backend={HTML5Backend}>
-        <ImageList images={images} moveImage={moveImage} />
-      </DndProvider> */}
       <Dropzone
         multiple={true}
         minSize={0}
         maxSize={10485760}
-        accept="image/png,image/jpg,image/jpeg"
+        accept={acceptFiles}
         onDrop={(acceptedFiles) => {
           const reader = new FileReader();
 
           acceptedFiles.forEach((file) => {
             reader.onload = (event) => {
-              const buffer = event.target.result;
-              enviarImagem(buffer, file.name, file.type)
-                .then(() => console.log('Imagem enviada'))
-                .catch((error) => {
-                  throw new Error(error);
-                });
+              // const buffer = event.target.result;
+              console.log(file);
+              //   enviarImagem(buffer, file.name, file.type)
+              //     .then(() => console.log('Imagem enviada'))
+              //     .catch((error) => {
+              //       throw new Error(error);
+              //     });
             };
             reader.readAsArrayBuffer(file);
           });
